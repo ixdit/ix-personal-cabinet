@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'IXPC\\Main' => $baseDir . '/classes/class-main.php',
+    'IXPC\\Templater' => $baseDir . '/classes/class-templater.php',
 );

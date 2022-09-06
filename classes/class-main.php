@@ -6,6 +6,8 @@ class Main {
 
 	private static ?Main $instance = null;
 
+	public Templater $templater;
+
 	public static function instance(): Main {
 
 		if ( is_null( self::$instance ) ) :
@@ -20,9 +22,12 @@ class Main {
 
 		$this->init();
 
+
 	}
 
 	public function init() {
+
+		$this->templater = new Templater();
 
 //		( new Requirements() )->init();
 //		( new Register_Field() )->init();
