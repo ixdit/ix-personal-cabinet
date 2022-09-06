@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'IXPC\\main' => $baseDir . '/classes/class-main.php',
+    'IXPC\\Main' => $baseDir . '/classes/class-main.php',
 );

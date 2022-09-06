@@ -4,7 +4,7 @@ namespace IXPC;
 
 class Main {
 
-	private static Main $instance;
+	private static ?Main $instance = null;
 
 	public static function instance(): Main {
 
