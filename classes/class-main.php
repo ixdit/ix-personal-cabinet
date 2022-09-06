@@ -2,11 +2,11 @@
 
 namespace IXPC;
 
-class main {
+class Main {
 
-	private static $instance;
+	private static Main $instance;
 
-	public static function instance() {
+	public static function instance(): Main {
 
 		if ( is_null( self::$instance ) ) :
 			self::$instance = new self();

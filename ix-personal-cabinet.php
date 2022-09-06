@@ -1,13 +1,13 @@
 <?php
 /**
- * Plugin Name:       Ix Woocommerce Descriptions Archives
- * Plugin URI:        #
- * Description:       Дополнительное описание для страниц архива woo
- * Author:
+ * Plugin Name:       Ix Personal Cabinet
+ * Plugin URI:        https://github.com/ixdit/ix-personal-cabinet
+ * Description:       Plugin Personal users cabinet
+ * Author:            Dmitry Vorobiev & Artem Abramovich
  * Author URI:
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       ix-woocommerce-descriptions-archives
+ * Text Domain:       ix-personal-cabinet
  * Domain Path:       /languages/
  *
  * Version:           1.0.0
@@ -27,7 +27,7 @@ define( 'IXPC_PLUGIN_DIR', __DIR__ );
 define( 'IXPC_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 define( 'IXPC_PLUGIN_FILE', plugin_basename( __FILE__ ) );
 
-define( 'IXPC_PLUGIN_NAME', 'Ix Woocommerce Descriptions Archives' );
+define( 'IXPC_PLUGIN_NAME', 'Ix Personal Cabinet' );
 
 require IXPC_PLUGIN_DIR . '/vendor/autoload.php';
 
