@@ -21,4 +21,12 @@
 	<button type="submit" class="mt-2 btn btn--gold-border btn--size-lg btn--block">
 		Войти
 	</button>
+
+    <button type="button" class="mt-2 btn btn--gold-border btn--size-lg btn--block">
+        регистрация
+    </button>
+    <button type="button" class="mt-2 btn btn--gold-border btn--size-lg btn--block">
+        восстановить пароль
+    </button>
+
 </form>

@@ -31,4 +31,16 @@ define( 'IXPC_PLUGIN_NAME', 'Ix Personal Cabinet' );
 
 require IXPC_PLUGIN_DIR . '/vendor/autoload.php';
 
-\IXPC\Main::instance();
+if ( ! function_exists( 'ixpc' ) ) {
+	/**
+	 *
+	 * @return object IXPC class object.
+	 * @since 1.0.0
+	 */
+	function ixpc(): object {
+
+		return IXPC\Main::instance();;
+	}
+}
+
+ixpc();

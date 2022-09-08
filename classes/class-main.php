@@ -22,17 +22,19 @@ class Main {
 
 		$this->init();
 
-
 	}
 
 	public function init() {
 
 		$this->templater = new Templater();
+		( new Shortcodes() )->init_hoocks();
 
 //		( new Requirements() )->init();
 //		( new Register_Field() )->init();
 //		( new Output() )->init();
 
 	}
+
+
 
 }
