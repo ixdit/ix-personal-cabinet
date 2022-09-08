@@ -4,7 +4,7 @@ namespace IXPC;
 
 class Shortcodes {
 
-	public function init_hoocks() {
+	public function init_hooks() {
 
 		add_shortcode( 'ixpc_login', [ $this , 'login' ] );
 

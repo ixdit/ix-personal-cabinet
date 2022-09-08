@@ -27,7 +27,7 @@ class Main {
 	public function init() {
 
 		$this->templater = new Templater();
-		( new Shortcodes() )->init_hoocks();
+		( new Shortcodes() )->init_hooks();
 		( new Rest() )->init_hooks();
 
 //		( new Requirements() )->init();
