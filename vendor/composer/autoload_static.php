@@ -8,6 +8,7 @@ class ComposerStaticInit039e650149838f33472f0fe8f21b28d9
 {
     public static $classMap = array (
         'IXPC\\Main' => __DIR__ . '/../..' . '/classes/class-main.php',
+        'IXPC\\Rest' => __DIR__ . '/../..' . '/classes/class-rest.php',
         'IXPC\\Shortcodes' => __DIR__ . '/../..' . '/classes/class-shortcodes.php',
         'IXPC\\Templater' => __DIR__ . '/../..' . '/classes/class-templater.php',
     );

@@ -28,6 +28,7 @@ class Main {
 
 		$this->templater = new Templater();
 		( new Shortcodes() )->init_hoocks();
+		( new Rest() )->init_hooks();
 
 //		( new Requirements() )->init();
 //		( new Register_Field() )->init();
