@@ -1,7 +1,7 @@
 <?php
 
 ?>
-
+<h3>auth form</h3>
 <form action="" class="js-login-form" novalidate>
 	<div class="form-group">
 		<input type="text" class="form-input" placeholder="Логин" required="required" id="login" name="login">
@@ -28,5 +28,4 @@
     <button type="button" class="mt-2 btn btn--gold-border btn--size-lg btn--block">
         восстановить пароль
     </button>
-
 </form>
