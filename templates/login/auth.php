@@ -2,7 +2,7 @@
 
 ?>
 <h3>auth form</h3>
-<form action="" class="js-login-form" novalidate>
+<form action="" class="login-form user_action_form">
 	<div class="form-group">
 		<input type="text" class="form-input" placeholder="Логин" required="required" id="login" name="login">
 		<div class="invalid-feedback">

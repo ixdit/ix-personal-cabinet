@@ -2,7 +2,7 @@
 
 ?>
 <h3>register form</h3>
-<form action="" class="js-reg-form" novalidate>
+<form action="" class="reg_form user_action_form">
 	<div class="form-group">
 		<input type="text" class="form-input" placeholder="Ваш логин" name="reg-login" id="reg-login" required="required">
 		<div class="invalid-feedback">

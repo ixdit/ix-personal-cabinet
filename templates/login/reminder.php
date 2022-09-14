@@ -2,7 +2,7 @@
 
 ?>
 <h3>reminder form</h3>
-<form action="" class="js-rpass-form" novalidate>
+<form action="" class="reminder_form user_action_form" novalidate>
 	<div class="form-group">
 		<input type="email" class="form-input" placeholder="Ваш E-mail*" name="remail" id="remail" required="required">
 		<div class="invalid-feedback form-error">
