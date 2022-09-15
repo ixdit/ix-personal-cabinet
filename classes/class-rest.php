@@ -87,33 +87,37 @@ class Rest {
 
 		$request_user_data = $request->get_body_params();
 		$username = sanitize_text_field($request_user_data['username']);
-		$email = sanitize_text_field($request_user_data['email']);
-		$password = sanitize_text_field($request_user_data['password']);
+		$email = sanitize_email( $request_user_data['email'] );
+		$password = $request_user_data['password'];
 
 		$error = new WP_Error;
 
 		$username_exists = username_exists($username);
+
 		if ( $username_exists ) {
 			$error->add( 'username_exists', __( 'Username already exists.', 'ix-register' ), array('status' => 400));
 			return $error;
 		}
 
-		$email_exists = email_exists($email);
-		if ( $email_exists ) {
+		if ( $email &&  is_email($request_user_data['email']) ) {
+			$email_exists = email_exists($email);
+		} else {
 			$error->add( 'email_exists', __( 'Email already exists.', 'ix-register' ), array('status' => 400));
 			return $error;
 		}
 
-		$user_id = wp_create_user($username, $password, $email);
-		if (!is_wp_error($user_id)) {
-			$user = get_user_by('id', $user_id);
-			$user->set_role('subscriber');
+		if ( !$username_exists && !$email_exists ) {
+			$user_id = wp_create_user($username, $password, $email);
+			if (!is_wp_error($user_id)) {
+				$user = get_user_by('id', $user_id);
+				$user->set_role('subscriber');
 
-			$response['code'] = 200;
-			$response['message'] = __("User '" . $username . "' Registration was Successful", "ix-register");
-		} else {
-			$error->add( 'create_user', __( 'Error during registration.', 'ix-register' ), array('status' => 400));
-			return $error;
+				$response['code'] = 200;
+				$response['message'] = __("User '" . $username . "' Registration was Successful", "ix-register");
+			} else {
+				$error->add( 'create_user', __( 'Error during registration.', 'ix-register' ), array('status' => 400));
+				return $error;
+			}
 		}
 
 		return $response;
