@@ -14,7 +14,7 @@ class Rest {
 
 	public function endpoints() {
 
-		register_rest_route( 'ix/v1/', 'auth/', [
+		register_rest_route( IXPC_REST_ROUT_PREFIX, 'auth/', [
 			'methods'  => 'POST',
 			'callback' => [ $this, 'auth'],
 			'permission_callback' => '__return_true',
@@ -28,7 +28,7 @@ class Rest {
 			],
 		] );
 
-		register_rest_route( 'ix/v1/', 'register/', [
+		register_rest_route( IXPC_REST_ROUT_PREFIX, 'register/', [
 			'methods'  => 'POST',
 			'callback' => [$this, 'register'],
 			'permission_callback' => '__return_true',
@@ -45,7 +45,7 @@ class Rest {
 			],
 		] );
 
-		register_rest_route( 'ix/v1/', 'reminder/', [
+		register_rest_route( IXPC_REST_ROUT_PREFIX, 'reminder/', [
 			'methods'  => 'POST',
 			'callback' => 'reminder',
 			'permission_callback' => function () {

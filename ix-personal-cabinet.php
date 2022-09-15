@@ -27,6 +27,8 @@ define( 'IXPC_PLUGIN_DIR', __DIR__ );
 define( 'IXPC_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
 define( 'IXPC_PLUGIN_FILE', plugin_basename( __FILE__ ) );
 
+define( 'IXPC_REST_ROUT_PREFIX', 'ix/v1/');
+
 define( 'IXPC_PLUGIN_VER', '1.0.0' );
 
 define( 'IXPC_PLUGIN_NAME', 'Ix Personal Cabinet' );
