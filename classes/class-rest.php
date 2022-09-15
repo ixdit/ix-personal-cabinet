@@ -2,6 +2,8 @@
 
 namespace IXPC;
 
+use WP_Error;
+
 class Rest {
 
 	public function init_hooks() {
@@ -88,7 +90,7 @@ class Rest {
 		$email = sanitize_text_field($request_user_data['email']);
 		$password = sanitize_text_field($request_user_data['password']);
 
-		$error = new WP_Error();
+		$error = new WP_Error;
 
 		$username_exists = username_exists($username);
 		if ( $username_exists ) {
@@ -99,6 +101,7 @@ class Rest {
 		$email_exists = email_exists($email);
 		if ( $email_exists ) {
 			$error->add( 'email_exists', __( 'Email already exists.', 'ix-register' ), array('status' => 400));
+			return $error;
 		}
 
 		$user_id = wp_create_user($username, $password, $email);
@@ -109,7 +112,8 @@ class Rest {
 			$response['code'] = 200;
 			$response['message'] = __("User '" . $username . "' Registration was Successful", "ix-register");
 		} else {
-			return $user_id;
+			$error->add( 'create_user', __( 'Error during registration.', 'ix-register' ), array('status' => 400));
+			return $error;
 		}
 
 		return $response;
