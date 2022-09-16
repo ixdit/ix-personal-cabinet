@@ -17,7 +17,7 @@ class Enqueue {
 			IXPC_PLUGIN_URI . 'assets/js/main.js',
 			[ 'jquery' ],
 			IXPC_PLUGIN_VER,
-			false
+			true
 		);
 
 		wp_register_style(
@@ -29,6 +29,17 @@ class Enqueue {
 
 		wp_enqueue_script( 'ixpc-scripts' );
 		wp_enqueue_style( 'ixpc-styles' );
+
+		wp_localize_script(
+		'ixpc-scripts',
+		'rest_data',
+			array(
+			'root'  => esc_url_raw( rest_url() ),
+//			'url'   => admin_url( 'admin-ajax.php' ),
+			'nonce' => wp_create_nonce( 'wp_rest'),
+			),
+		);
+
 
 	}
 

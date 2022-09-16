@@ -20,10 +20,13 @@ class Rest {
 			'permission_callback' => '__return_true',
 			'args'     => [
 				'login' => [
-					'default' => '',
+					'required' => true,
 				],
 				'password' => [
-					'password' => '',
+					'required' => true,
+				],
+				'remember' => [
+					'default' => '',
 				],
 			],
 		] );
@@ -75,9 +78,39 @@ class Rest {
 
 	public function auth( \WP_REST_Request $request ) {
 
-		print_r($request);
+		$response = array();
 
-		return 'ok';
+		$get_auth_params = $request->get_body_params();
+
+		$login = $get_auth_params['login'];
+		$password = $get_auth_params['password'];
+		$remember = $get_auth_params['remember'];
+
+		$error = new WP_Error;
+
+		if ( $login && $password ) {
+
+			$auth_params = array();
+			$auth_params['user_login'] = $login;
+			$auth_params['user_password'] = $password;
+			if ( $remember ) {
+				$auth_params['remember'] = true;
+			}
+
+			$user = wp_signon( $auth_params, false );
+//			print_r($user);
+			if ( !is_wp_error($user) ) {
+				$response['code'] = 200;
+				$response['message'] = __("Auth Successful", "ix-auth");
+				return $response;
+			} else {
+				return $user->get_error_message();
+			}
+		} else {
+			$error->add( 'invalid_auth', __( 'Invalid login or password', 'ix-auth' ) );
+			return $error;
+		}
+//
 	}
 
 	public function register( \WP_REST_Request $request ) {

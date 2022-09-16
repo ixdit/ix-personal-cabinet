@@ -10,13 +10,11 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<input type="password" class="form-input" placeholder="Пароль" required="required" id="pass" name="pass">
+		<input type="password" class="form-input" placeholder="Пароль" required="required" id="pass" name="password">
 		<div class="invalid-feedback form-error">
 			Поле обязательно для заполнения
 		</div>
 	</div>
-
-    <input  type="hidden" name="action" value="auth">
 
 	<div class="text-right">
 
