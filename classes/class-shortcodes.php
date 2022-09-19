@@ -2,6 +2,8 @@
 
 namespace IXPC;
 
+use WP_REST_Request;
+
 class Shortcodes {
 
 	public function init_hooks() {
@@ -29,11 +31,24 @@ class Shortcodes {
 
 		ob_start();
 
-		load_template(
-			ixpc()->templater->get_template('/login/auth.php'),
-			true,
-			$args
-		);
+		?>
+		<div class="ixpc_forms_wrapper">
+
+		</div>
+		<?php
+
+//		$request = new WP_REST_Request( 'POST', 'ix/v1/form' );
+//		// Установим параметры запроса
+//		$request->set_param( 'form', 'auth' );
+//		$response = rest_do_request( $request );
+//
+//		print_r($request);
+
+//		load_template(
+//			ixpc()->templater->get_template('/login/auth.php'),
+//			true,
+//			$args
+//		);
 
 		return ob_get_clean();
 	}

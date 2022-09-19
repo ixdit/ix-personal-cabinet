@@ -4688,6 +4688,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var postcss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! postcss */ "./node_modules/postcss/lib/postcss.mjs");
 
 jQuery(document).ready(function ($) {
+  $(document).ready(function ($) {
+    var apiURL = rest_data.root + 'ix/v1/get_form/';
+    var data = {
+      form_type: 'auth'
+    };
+    get_forms(data, apiURL);
+  });
   $('.user_action_form').on('submit', function (e) {
     e.preventDefault();
     var thisForm = $(this);
@@ -4696,6 +4703,18 @@ jQuery(document).ready(function ($) {
 
     console.log(apiURL);
     send_data(data, apiURL);
+  });
+  $(document).on('click', '.get_forms', function (e) {
+    e.preventDefault();
+    var apiURL = $(this).attr('data-rout');
+    var form_type = $(this).attr('data-form_type');
+    var data = {
+      form_type: form_type
+    }; // let apiURL = rest_data.root;
+
+    console.log(apiURL);
+    console.log(form_type);
+    get_forms(data, apiURL);
   });
 
   function send_data(data, apiURL) {
@@ -4707,6 +4726,25 @@ jQuery(document).ready(function ($) {
         xhr.setRequestHeader('X-WP-Nonce', rest_data.nonce);
       },
       success: function success(request) {
+        $('.ixpc_forms_wrapper').html(request);
+        console.log('successful', request);
+      },
+      error: function error(err) {
+        console.log('errors: ', err);
+      }
+    });
+  }
+
+  function get_forms(data, apiURL) {
+    $.ajax({
+      url: apiURL,
+      data: data,
+      type: 'POST',
+      beforeSend: function beforeSend(xhr) {
+        xhr.setRequestHeader('X-WP-Nonce', rest_data.nonce);
+      },
+      success: function success(request) {
+        $('.ixpc_forms_wrapper').html(request);
         console.log('successful', request);
       },
       error: function error(err) {

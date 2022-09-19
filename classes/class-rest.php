@@ -6,13 +6,13 @@ use WP_Error;
 
 class Rest {
 
-	public function init_hooks() {
+	public function init_hooks(): void {
 
 		add_action( 'rest_api_init', [ $this, 'endpoints' ] );
 
 	}
 
-	public function endpoints() {
+	public function endpoints(): void {
 
 		register_rest_route( IXPC_REST_ROUT_PREFIX, 'auth/', [
 			'methods'  => 'POST',
@@ -51,9 +51,7 @@ class Rest {
 		register_rest_route( IXPC_REST_ROUT_PREFIX, 'reminder/', [
 			'methods'  => 'POST',
 			'callback' => 'reminder',
-			'permission_callback' => function () {
-				return current_user_can( 'edit_others_posts' );
-			},
+			'permission_callback' => '__return_true',
 			'args'     => [
 				'email'    => [
 					'default' => '',
@@ -61,15 +59,13 @@ class Rest {
 			],
 		] );
 
-		register_rest_route( 'ix/v1/', 'form/', [
+		register_rest_route( IXPC_REST_ROUT_PREFIX, 'get_form/', [
 			'methods'  => 'POST',
-			'callback' => 'reminder',
-			'permission_callback' => function () {
-				return current_user_can( 'edit_others_posts' );
-			},
+			'callback' => [$this, 'get_the_forms'] ,
+			'permission_callback' => '__return_true',
 			'args'     => [
-				'email'    => [
-					'default' => '',
+				'form_type'    => [
+					'default' => 'auth',
 				],
 			],
 		] );
@@ -158,9 +154,59 @@ class Rest {
 
 	public function reminder( \WP_REST_Request $request ) {
 
-		print_r($request);
+		$response = array();
+		$error = new WP_Error;
 
-		return 'ok';
+		$request_user_data = $request->get_body_params();
+		$remind_email = $request_user_data['email'];
+		$user_id = get_user_by('login', $remind_email);
+
+		if ( !$user_id ) {
+			$error->add( 'user_remind_password', __( 'User not found.', 'ix-reminder' ), array('status' => 101));
+			return $error;
+		} else {
+
+		}
+
+		return $response;
 	}
+
+	public function get_the_forms( \WP_REST_Request $request ) {
+
+		$request_data = $request->get_body_params();
+		$form_type = $request_data['form_type'];
+
+		ob_start();
+
+		$args = array();
+
+		if ( $form_type == 'auth' ) {
+			load_template(
+				ixpc()->templater->get_template('/login/auth.php'),
+				true,
+				$args
+			);
+		}
+
+		if ( $form_type == 'register' ) {
+			load_template(
+				ixpc()->templater->get_template('/login/register.php'),
+				true,
+				$args
+			);
+		}
+
+		if ( $form_type == 'reminder' ) {
+			load_template(
+				ixpc()->templater->get_template('/login/reminder.php'),
+				true,
+				$args
+			);
+		}
+
+		return ob_get_clean();
+	}
+
+
 
 }
