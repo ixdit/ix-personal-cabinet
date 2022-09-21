@@ -26,7 +26,7 @@ class Rest {
 					'required' => true,
 				],
 				'remember' => [
-					'default' => '',
+					'default' => true,
 				],
 			],
 		] );
@@ -50,7 +50,7 @@ class Rest {
 
 		register_rest_route( IXPC_REST_ROUT_PREFIX, 'reminder/', [
 			'methods'  => 'POST',
-			'callback' => 'reminder',
+			'callback' => [$this, 'reminder'],
 			'permission_callback' => '__return_true',
 			'args'     => [
 				'email'    => [
@@ -96,14 +96,19 @@ class Rest {
 			$user = wp_signon( $auth_params, false );
 //			print_r($user);
 			if ( !is_wp_error($user) ) {
-				$response['code'] = 200;
-				$response['message'] = __("Auth Successful", "ix-auth");
+				$response['status'] = 200;
+				$response['code'] = 'success';
+				$response['form'] ='auth';
+				$response['message'] = __("Auth Successful", "ixpc");
 				return $response;
 			} else {
-				return $user->get_error_message();
+//				print_r($user->get_error_message());
+//				return $user->get_error_message();
+				$error->add( 'invalid_auth', __( 'Invalid login or password', 'ixpc' ) );
+				return $error;
 			}
 		} else {
-			$error->add( 'invalid_auth', __( 'Invalid login or password', 'ix-auth' ) );
+			$error->add( 'invalid_auth', __( 'Invalid login or password', 'ixpc' ) );
 			return $error;
 		}
 //
@@ -124,14 +129,14 @@ class Rest {
 		$username_exists = username_exists($username);
 
 		if ( $username_exists ) {
-			$error->add( 'username_exists', __( 'Username already exists.', 'ix-register' ), array('status' => 400));
+			$error->add( 'username_exists', __( 'Username already exists.', 'ixpc' ), array('status' => 400));
 			return $error;
 		}
 
 		if ( $email &&  is_email($request_user_data['email']) ) {
 			$email_exists = email_exists($email);
 		} else {
-			$error->add( 'email_exists', __( 'Email already exists.', 'ix-register' ), array('status' => 400));
+			$error->add( 'email_exists', __( 'Email already exists.', 'ixpc' ), array('status' => 401));
 			return $error;
 		}
 
@@ -141,10 +146,12 @@ class Rest {
 				$user = get_user_by('id', $user_id);
 				$user->set_role('subscriber');
 
-				$response['code'] = 200;
-				$response['message'] = __("User '" . $username . "' Registration was Successful", "ix-register");
+				$response['status'] = 200;
+				$response['code'] = 'success';
+				$response['form'] ='register';
+				$response['message'] = __("User '" . $username . "' Registration was Successful", "ixpc");
 			} else {
-				$error->add( 'create_user', __( 'Error during registration.', 'ix-register' ), array('status' => 400));
+				$error->add( 'err_create_user', __( 'Error during registration.', 'ixpc' ), array('status' => 403));
 				return $error;
 			}
 		}
@@ -158,17 +165,44 @@ class Rest {
 		$error = new WP_Error;
 
 		$request_user_data = $request->get_body_params();
+
 		$remind_email = $request_user_data['email'];
-		$user_id = get_user_by('login', $remind_email);
 
-		if ( !$user_id ) {
-			$error->add( 'user_remind_password', __( 'User not found.', 'ix-reminder' ), array('status' => 101));
-			return $error;
+		if ( is_email( $remind_email ) ) {
+			$user_data = get_user_by('email', $remind_email);
 		} else {
+			$user_data = get_user_by('login', $remind_email);
+		}
+		$user_id = $user_data->ID;
+		print_r($request_user_data);
 
+		if ( empty( $user_data ) ) {
+			$error->add( 'err_remind_password', __( 'User not found.', 'ixpc' ), array('status' => 400));
+			return $error;
 		}
 
-		return $response;
+		$user_login = $user_data->user_login;
+		$user_email = $user_data->user_email;
+		$key        = get_password_reset_key( $user_data );
+
+		if ( is_wp_error( $key ) ) {
+			return $key;
+		}
+
+		$message = site_url( "/personal-cabinet/test?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' );
+
+		$title = __( 'Password Reset' );
+
+		$defaults = array(
+			'to'      => $user_email,
+			'subject' => $title,
+			'message' => $message,
+			'headers' => '',
+		);
+
+		$mail = wp_mail( $defaults['to'], $defaults['subject'], $defaults['message'], $defaults['headers']);
+
+		return $mail;
 	}
 
 	public function get_the_forms( \WP_REST_Request $request ) {

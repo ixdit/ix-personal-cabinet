@@ -4,7 +4,7 @@
 <h3>reminder form</h3>
 <form action="" class="reminder_form user_action_form">
 	<div class="form-group">
-		<input type="email" class="form-input" placeholder="Ваш E-mail*" name="email" id="remail" required="required">
+		<input type="text" class="form-input" placeholder="Ваш E-mail*" name="email" id="remail" required="required">
 		<div class="invalid-feedback form-error">
 			Необходимо ввести валидный E-mail
 		</div>

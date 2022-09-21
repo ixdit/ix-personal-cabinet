@@ -48,3 +48,26 @@ if ( ! function_exists( 'ixpc' ) ) {
 }
 
 ixpc();
+
+add_action( 'init', 'add_my_endpoint' );
+
+function add_my_endpoint(){
+	add_rewrite_endpoint( 'test', EP_ROOT | EP_PAGES );
+}
+
+add_action( 'template_include', 'makeplugins_json_template_include' );
+
+function makeplugins_json_template_include( $template ) {
+	global $wp_query;
+
+	// if this is a request for json or a singular object then bail
+	// include custom template
+	if ( isset( $wp_query->query_vars['test'] ) ){
+		load_template(
+			ixpc()->templater->get_template('/test.php'),
+			true
+		);
+	}
+
+	return $template;
+}
