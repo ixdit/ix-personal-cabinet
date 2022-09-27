@@ -59,6 +59,20 @@ class Rest {
 			],
 		] );
 
+		register_rest_route( IXPC_REST_ROUT_PREFIX, 'validate/', [
+			'methods'  => 'POST',
+			'callback' => [$this, 'validate'],
+			'permission_callback' => '__return_true',
+			'args'     => [
+				'key'    => [
+					'required' => true,
+				],
+				'login'    => [
+					'required' => true,
+				],
+			],
+		] );
+
 		register_rest_route( IXPC_REST_ROUT_PREFIX, 'get_form/', [
 			'methods'  => 'POST',
 			'callback' => [$this, 'get_the_forms'] ,
@@ -66,6 +80,23 @@ class Rest {
 			'args'     => [
 				'form_type'    => [
 					'default' => 'auth',
+				],
+			],
+		] );
+
+		register_rest_route( IXPC_REST_ROUT_PREFIX, 'setpass/', [
+			'methods'  => 'POST',
+			'callback' => [$this, 'setpass'],
+			'permission_callback' => '__return_true',
+			'args'     => [
+				'new_pass'    => [
+					'required' => true,
+				],
+				'rpassword'    => [
+					'required' => true,
+				],
+				'user_id'    => [
+					'required' => true,
 				],
 			],
 		] );
@@ -189,7 +220,7 @@ class Rest {
 			return $key;
 		}
 
-		$message = site_url( "/personal-cabinet/test?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' );
+		$message = site_url( "/personal-cabinet/forgot-pass?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' );
 
 		$title = __( 'Password Reset' );
 
@@ -214,7 +245,7 @@ class Rest {
 
 		$args = array();
 
-		if ( $form_type == 'auth' ) {
+		if ( $form_type === 'auth' ) {
 			load_template(
 				ixpc()->templater->get_template('/login/auth.php'),
 				true,
@@ -222,7 +253,7 @@ class Rest {
 			);
 		}
 
-		if ( $form_type == 'register' ) {
+		if ( $form_type === 'register' ) {
 			load_template(
 				ixpc()->templater->get_template('/login/register.php'),
 				true,
@@ -230,7 +261,7 @@ class Rest {
 			);
 		}
 
-		if ( $form_type == 'reminder' ) {
+		if ( $form_type === 'reminder' ) {
 			load_template(
 				ixpc()->templater->get_template('/login/reminder.php'),
 				true,
@@ -240,6 +271,17 @@ class Rest {
 
 		return ob_get_clean();
 	}
+
+	public function setpass( \WP_REST_Request $request ) {
+
+		$request_data = $request->get_body_params();
+
+		wp_set_password( $request_data['new_pass'], $request_data['user_id'] );
+
+		return 'success';
+
+	}
+
 
 
 

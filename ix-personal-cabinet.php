@@ -49,24 +49,43 @@ if ( ! function_exists( 'ixpc' ) ) {
 
 ixpc();
 
-add_action( 'init', 'add_my_endpoint' );
+add_action( 'init', 'add_ixpc_endpoint' );
 
-function add_my_endpoint(){
-	add_rewrite_endpoint( 'test', EP_ROOT | EP_PAGES );
+function add_ixpc_endpoint(){
+	add_rewrite_endpoint( 'set-pass', EP_ROOT | EP_PAGES );
+	add_rewrite_endpoint( 'forgot-pass', EP_ROOT | EP_PAGES );
+
 }
 
-add_action( 'template_include', 'makeplugins_json_template_include' );
-
-function makeplugins_json_template_include( $template ) {
+//add_action( 'template_include', 'add_set_pass_page' );
+function add_set_pass_page( $template ) {
 	global $wp_query;
 
-	// if this is a request for json or a singular object then bail
-	// include custom template
-	if ( isset( $wp_query->query_vars['test'] ) ){
+	if ( isset( $wp_query->query_vars['set-pass'] ) ){
 		load_template(
-			ixpc()->templater->get_template('/test.php'),
+			ixpc()->templater->get_template('/set-pass.php'),
 			true
 		);
+	}
+
+	return $template;
+}
+
+//add_action( 'template_include', 'add_forgot_pass_page' );
+function add_forgot_pass_page( $template ) {
+
+	global $wp_query;
+
+	if ( isset( $wp_query->query_vars['forgot-pass'] ) ){
+
+		if ( isset( $_GET['key'], $_GET['login'] ) && $_GET['action'] == 'rp' ) {
+
+			$template = ixpc()->templater->get_template('/set-pass.php');
+
+		} else {
+			$template = ixpc()->templater->get_template('/forgot-pass.php');
+		}
+
 	}
 
 	return $template;
