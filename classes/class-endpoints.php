@@ -4,13 +4,22 @@ namespace IXPC;
 
 class Endpoints {
 
-	private array $endpoints;
+	public function init_hooks(): void {
 
-	public function __construct(array $endpoints) {
+		add_action( 'init', [ $this, 'add_ixpc_endpoint' ] );
 
-		$this->endpoints = [
+	}
 
-		];
+	public function add_ixpc_endpoint() {
+
+		//query checkpoint for user forms
+		add_rewrite_endpoint( 'forgot-pass', EP_ROOT | EP_PAGES );
+
+		//query checkpoint for personal cabinet
+		add_rewrite_endpoint( 'dashboard', EP_ROOT | EP_PAGES );
+		add_rewrite_endpoint( 'articles', EP_ROOT | EP_PAGES );
+		add_rewrite_endpoint( 'profile', EP_ROOT | EP_PAGES );
+		add_rewrite_endpoint( 'change-pass', EP_ROOT | EP_PAGES );
 	}
 
 }

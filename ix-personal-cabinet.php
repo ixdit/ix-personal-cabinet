@@ -48,8 +48,3 @@ if ( ! function_exists( 'ixpc' ) ) {
 }
 
 ixpc();
-
-add_action( 'init', 'add_ixpc_endpoint' );
-function add_ixpc_endpoint(){
-	add_rewrite_endpoint( 'forgot-pass', EP_ROOT | EP_PAGES );
-}
