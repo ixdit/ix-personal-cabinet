@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'IXPC\\Endpoints' => $baseDir . '/classes/class-endpoints.php',
     'IXPC\\Enqueue' => $baseDir . '/classes/class-enqueue.php',
     'IXPC\\Main' => $baseDir . '/classes/class-main.php',
     'IXPC\\Rest' => $baseDir . '/classes/class-rest.php',
