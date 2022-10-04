@@ -22,6 +22,7 @@ module.exports = {
 	devtool:      ! isProduction ? 'source-map' : false,
 	entry:        {
 		main:                 path.resolve( process.cwd(), 'src/js', 'main.js' ),
+		account:              path.resolve( process.cwd(), 'src/js', 'account.js' ),
 		style:                 path.resolve( process.cwd(), 'src/scss', 'style.scss' ),
 		//sprite:               glob.sync( path.resolve( __dirname, 'src/icons/*.svg' ) ),
 	},

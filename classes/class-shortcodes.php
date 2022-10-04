@@ -22,7 +22,9 @@ class Shortcodes {
 			load_template(
 				ixpc()->templater->get_template( '/personal_cabinet.php' ),
 				true,
-//		        $args
+				array(
+					'current_user' => get_user_by( 'id', get_current_user_id() ),
+				)
 			);
 
 		} else {

@@ -1,4 +1,4 @@
-<h3><?php echo _e( 'Account details', 'ixpc' ); ?></h3>
+<h3><?php echo _e( 'Account details1', 'ixpc' ); ?></h3>
 <form class="pc-user-form edit_accaunt" method="post">
 
 	<div class="form-group">

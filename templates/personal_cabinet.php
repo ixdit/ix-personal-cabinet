@@ -23,6 +23,14 @@
         <main>
             <div class="personal_cabinet__content">
 
+	            <?php
+	            /**
+	             * My Account content.
+	             *
+	             */
+	            do_action( 'ixpc_account_content' );
+	            ?>
+
             </div>
         </main>
     </div>
