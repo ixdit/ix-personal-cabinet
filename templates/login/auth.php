@@ -8,7 +8,7 @@
             <input type="text" class="form-input" placeholder="Логин*" required="required" id="login" name="login">
         </div>
         <div class="form-group">
-            <input type="password" class="form-input" placeholder="Пароль*" required="required" id="pass" name="new-password">
+            <input type="password" class="form-input" placeholder="Пароль*" required="required" id="pass" name="password">
         </div>
 
         <div class="form-group form-group__remember-and-links">

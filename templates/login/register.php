@@ -18,8 +18,8 @@
             <input type="password" class="form-input compare_pass" placeholder="Повторить пароль" name="confirm_password" id="confirm_password" required="required"  autocomplete="new-password">
         </div>
         <div class="form-group__btn-block">
-            <button type="submit" class="btn btn--gold-border btn--size-lg btn--block mt-2 js-spinner" data-rout="<?php echo rest_url(IXPC_REST_ROUT_PREFIX.'register/'); ?>">
-                <span class="js-spinner__text">Зарегистрироваться</span>
+            <button type="submit" class="btn" data-rout="<?php echo rest_url(IXPC_REST_ROUT_PREFIX.'register/'); ?>">
+                <span class="js-spinner__text"><?php echo _e( 'Register', 'ixpc' ); ?></span>
             </button>
         </div>
 

@@ -24,9 +24,12 @@ $user = $args['user'];
 <!--                    Поле обязательно для заполнения-->
 <!--                </div>-->
             </div>
-            <button type="submit" class="btn btn--gold-border btn--size-lg btn--block mt-2 js-spinner" data-rout="<?php echo rest_url(IXPC_REST_ROUT_PREFIX.'setpass/'); ?>">
-                <span class="js-spinner__text">Отправить</span>
-            </button>
+            <div class="form-group__btn-block">
+                <button type="submit" class="btn" data-rout="<?php echo rest_url(IXPC_REST_ROUT_PREFIX.'setpass/'); ?>">
+                    <span class="js-spinner__text"><?php echo _e( 'Set Password', 'ixpc' ); ?></span>
+                </button>
+            </div>
+
             <input type="hidden" name="user_id" value="<?php echo $user->ID;?>">
         </form>
 </div>

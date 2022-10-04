@@ -1,3 +1,9 @@
+* {
+  outline: none;
+}
+a:focus {
+  outline: none;
+}
 .form_wrapper {
   border: 1px solid #cbcbcb;
   border-radius: 15px;
@@ -53,5 +59,35 @@
       }
     }
 
+  }
+}
+
+/**
+* personal cabinet style
+*/
+.personal_cabinet__container {
+  display: flex;
+  width: 100%;
+  border: 1px solid #cbcbcb;
+  border-radius: 5px;
+  padding: 25px;
+  margin: 25px 0;
+  aside {
+    width: 30%;
+    ul {
+      list-style: none;
+      margin-left: 10px;
+      li {
+        padding-bottom: 15px;
+        a {
+          text-decoration: none !important;
+          color: inherit;
+          &:hover { color: #0D83C2FF}
+        }
+      }
+    }
+  }
+  main {
+    width: 70%;
   }
 }
