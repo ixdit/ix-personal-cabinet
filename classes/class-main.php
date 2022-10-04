@@ -30,6 +30,7 @@ class Main {
 		( new Shortcodes() )->init_hooks();
 		( new Rest() )->init_hooks();
 		( new Enqueue())->init_hooks();
+		( new Endpoints())->init_hooks();
 
 
 //		( new Requirements() )->init();
