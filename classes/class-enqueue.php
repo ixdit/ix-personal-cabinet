@@ -20,6 +20,14 @@ class Enqueue {
 			true
 		);
 
+		wp_register_script(
+			'ixpc-account',
+			IXPC_PLUGIN_URI . 'assets/js/account.js',
+			[ 'jquery' ],
+			IXPC_PLUGIN_VER,
+			true
+		);
+
 		wp_register_style(
 			'ixpc-styles',
 			IXPC_PLUGIN_URI . 'assets/css/style.css',
@@ -28,6 +36,7 @@ class Enqueue {
 		);
 
 		wp_enqueue_script( 'ixpc-scripts' );
+		wp_enqueue_style( 'ixpc-account' );
 		wp_enqueue_style( 'ixpc-styles' );
 
 		wp_localize_script(
