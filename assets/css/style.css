@@ -1,4 +1,61 @@
 /*!********************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[5].use[3]!./src/scss/style.scss ***!
   \********************************************************************************************************************************************************************************************************************************************/
+.form_wrapper {
+  border: 1px solid #cbcbcb;
+  border-radius: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 15px 20px;
+}
+.form_wrapper a, .form_wrapper button, .form_wrapper input, .form_wrapper select, .form_wrapper textarea {
+  outline: none;
+}
+.form_wrapper input {
+  width: 100%;
+  margin-bottom: 25px;
+}
+.form_wrapper input[type=checkbox] {
+  width: auto;
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+.form_wrapper .form-group__remember-and-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.form_wrapper .form-group__remember-and-links .text-right {
+  display: flex;
+}
+.form_wrapper .form-group__remember-and-links .text-right .text-right__item {
+  margin-right: 10px;
+}
+.form_wrapper .form-group__remember-and-links .text-right .text-right__item a {
+  color: #0d66c2;
+  text-decoration: none;
+}
+.form_wrapper .form-group__remember-and-links .text-right .text-right__item a:hover {
+  color: #0d83c2;
+}
+.form_wrapper .form-group__btn-block {
+  margin-top: 25px;
+}
+.form_wrapper .form-group__btn-block button.btn {
+  width: fit-content;
+  min-width: 150px;
+  border: 1px solid #0d66c2;
+  background-color: #0d66c2;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 18px;
+  padding: 7px 15px;
+  text-decoration: none;
+  outline: none;
+}
+.form_wrapper .form-group__btn-block button.btn:hover {
+  border: 1px solid #0d83c2;
+  background-color: #0d83c2;
+}
 
+/*# sourceMappingURL=style.css.map*/

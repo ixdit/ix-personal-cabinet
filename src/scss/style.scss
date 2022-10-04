@@ -1,3 +1,57 @@
-body {
+.form_wrapper {
+  border: 1px solid #cbcbcb;
+  border-radius: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 15px 20px;
+  a,button,input,select,textarea {
+    outline: none;
+  }
+  input {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+  input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 0;
+  }
+  .form-group__remember-and-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .text-right {
+      display: flex;
+      .text-right__item {
+        margin-right: 10px;
+        a {
+          color: #0d66c2;
+          text-decoration: none;
+          &:hover {
+            color: #0D83C2FF;
+          }
+        }
+      }
+    }
+  }
+  .form-group__btn-block {
+    margin-top: 25px;
+    button.btn {
+      width: fit-content;
+      min-width: 150px;
+      border: 1px solid #0d66c2;
+      background-color: #0d66c2;
+      border-radius: 5px;
+      color: #ffffff;
+      font-size: 18px;
+      padding: 7px 15px;
+      text-decoration: none;
+      outline: none;
+      &:hover {
+        border: 1px solid #0D83C2FF;
+        background-color: #0D83C2FF;
+      }
+    }
 
+  }
 }

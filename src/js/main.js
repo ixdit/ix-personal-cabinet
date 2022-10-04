@@ -64,13 +64,14 @@ jQuery(document).ready(function ($) {
                 xhr.setRequestHeader('X-WP-Nonce', rest_data.nonce);
             },
             success: function (request) {
-                if(request.status === 200 && request.form === 'register') {
+                if(request.form === 'register') {
                     $('.ixpc_forms_wrapper').html('<div class="ixpc_forms_success"> ' + request.message + ' </div>');
                 }
-                if(request.status === 200 && request.form === 'auth') {
-                    $('.ixpc_forms_wrapper').html('<div class="ixpc_forms_success"> ' + request.message + ' </div>');
+                if(request.form === 'auth') {
+                    // $('.ixpc_forms_wrapper').html('<div class="ixpc_forms_success"> ' + request.message + ' </div>');
+                    // $('.ixpc_forms_wrapper').load(location.href + ' ' + '.ixpc_forms_wrapper' );
+                    location.reload();
                 }
-                console.log('successful', request);
             },
             error: function (err) {
 
@@ -93,12 +94,14 @@ jQuery(document).ready(function ($) {
             },
             success: function (request) {
                 $('.ixpc_forms_wrapper').html(request)
+                $('.user_action_form').trigger('reset')
                 // console.log('successful', request);
             },
             error: function (err) {
                 // console.log('errors: ', err);
             }
         });
+        $('ащкь').trigger('reset')
 
     }
 
