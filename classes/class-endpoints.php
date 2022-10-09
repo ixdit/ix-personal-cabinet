@@ -9,7 +9,12 @@ class Endpoints {
 		add_action( 'init', [ $this, 'add_endpoint' ] );
 
 		add_action( 'ixpc_account_content', [ $this, 'add_endoint_template' ] );
+
+		add_action( 'ixpc_account_dashboard_endpoint', [ $this, 'dashboard' ] );
+		add_action( 'ixpc_account_profile_endpoint', [ $this, 'view_profile' ] );
 		add_action( 'ixpc_account_edit-profile_endpoint', [ $this, 'edit_account' ] );
+		add_action( 'ixpc_account_change-pass_endpoint', [ $this, 'change_pass' ] );
+		add_action( 'ixpc_account_articles_endpoint', [ $this, 'articles' ] );
 
 	}
 
@@ -38,7 +43,7 @@ class Endpoints {
 					continue;
 				}
 
-//				do_action( 'qm/info',$key);
+				do_action( 'qm/info',$key);
 //				do_action( 'qm/info',$value);
 
 				if ( has_action( 'ixpc_account_' . $key . '_endpoint' ) ) {
@@ -48,6 +53,30 @@ class Endpoints {
 				}
 			}
 		}
+
+	}
+
+	public function dashboard() {
+
+		load_template(
+			ixpc()->templater->get_template( '/personal-cabinet/dashboard.php' ),
+			true,
+			[
+				'current_user' => get_user_by( 'id', get_current_user_id() ),
+			]
+		);
+
+	}
+
+	public function view_profile() {
+
+		load_template(
+			ixpc()->templater->get_template( '/personal-cabinet/profile.php' ),
+			true,
+			[
+				'current_user' => get_user_by( 'id', get_current_user_id() ),
+			]
+		);
 
 	}
 
@@ -62,5 +91,28 @@ class Endpoints {
 		);
 
 	}
+
+	public function change_pass() {
+		load_template(
+			ixpc()->templater->get_template( '/personal-cabinet/change-pass.php' ),
+			true,
+			[
+				'current_user' => get_user_by( 'id', get_current_user_id() ),
+			]
+		);
+	}
+
+	public function articles() {
+
+		load_template(
+			ixpc()->templater->get_template( '/personal-cabinet/articles.php' ),
+			true,
+			[
+				'current_user' => get_user_by( 'id', get_current_user_id() ),
+			]
+		);
+
+	}
+
 
 }

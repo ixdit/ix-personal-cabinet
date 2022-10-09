@@ -1,0 +1,1 @@
+<h3><?php echo _e( 'Articles', 'ixpc' ); ?></h3>

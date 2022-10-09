@@ -2,8 +2,6 @@
 
 namespace IXPC;
 
-use WP_REST_Request;
-
 class Shortcodes {
 
 	public function init_hooks() {
@@ -67,5 +65,7 @@ class Shortcodes {
 		return ob_get_clean();
 
 	}
+
+
 
 }

@@ -1,23 +1,13 @@
 <section class="personal_cabinet-area">
     <div class="personal_cabinet__container">
         <aside>
-            <ul>
-                <li>
-                    <a href="#"><?php _e( 'Dashboard', 'ixpc' ); ?></a>
-                </li>
-                <li>
-                    <a href="#"><?php _e( 'Articles', 'ixpc' ); ?></a>
-                </li>
-                <li>
-                    <a href="#"><?php _e( 'Profile', 'ixpc' ); ?></a>
-                </li>
-                <li>
-                    <a href="#"><?php _e( 'change-pass', 'ixpc' ); ?></a>
-                </li>
-                <li>
-                    <a href="#"><?php _e( 'Over', 'ixpc' ); ?></a>
-                </li>
-            </ul>
+	        <?php
+	        /**
+	         * Account navigation.
+	         *
+	         */
+	        do_action( 'ixpc_account_navigation' );
+	        ?>
 
         </aside>
         <main>
@@ -25,7 +15,7 @@
 
 	            <?php
 	            /**
-	             * My Account content.
+	             * Account content.
 	             *
 	             */
 	            do_action( 'ixpc_account_content' );

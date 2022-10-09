@@ -48,3 +48,16 @@ if ( ! function_exists( 'ixpc' ) ) {
 }
 
 ixpc();
+
+function qminfo($str) {
+	do_action( 'qm/info',$str);
+}
+function pre($str){
+	echo '<pre>';
+	print_r($str);
+	echo '</pre>';
+}
+
+
+
+
